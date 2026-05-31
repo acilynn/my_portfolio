@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atti Cindy Lynnette — Data Science Student</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #09070c;
+    --bg2:       #0d0a12;
+    --bg3:       #120e18;
+    --surface:   #16111f;
+    --surface2:  #1d1629;
+    --rose:      #e8956d;
+    --rose-lt:   #f0b99a;
+    --pink:      #d4639a;
+    --pink-lt:   #e88bbf;
+    --gold:      #c9906a;
+    --gold-lt:   #e8b99a;
+    --lavender:  #b89fd4;
+    --text:      #f0eaf5;
+    --text2:     #9b8aac;
+    --text3:     #4a3d5a;
+    --border:    rgba(232,149,109,0.12);
+    --border2:   rgba(232,149,109,0.28);
+    --border-pk: rgba(212,99,154,0.2);
+    --font-mono: 'DM Mono', monospace;
+    --font-serif:'Cormorant Garamond', serif;
+    --font-main: 'Outfit', sans-serif;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CURSOR */
+  .cursor { width:7px; height:7px; background:var(--pink); border-radius:50%; position:fixed; pointer-events:none; z-index:9999; transition:transform .1s; }
+  .cursor-ring { width:30px; height:30px; border:1px solid rgba(212,99,154,0.5); border-radius:50%; position:fixed; pointer-events:none; z-index:9998; transition:width .2s,height .2s,border-color .2s; }
+
+  /* SUBTLE DOT GRID */
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background-image: radial-gradient(rgba(232,149,109,0.07) 1px, transparent 1px);
+    background-size: 36px 36px;
+    pointer-events:none; z-index:0;
+  }
+
+  /* AMBIENT GLOWS */
+  .glow-left {
+    position:fixed; left:-200px; top:20%;
+    width:500px; height:500px; border-radius:50%;
+    background: radial-gradient(circle, rgba(212,99,154,0.06) 0%, transparent 65%);
+    pointer-events:none; z-index:0;
+  }
+  .glow-right {
+    position:fixed; right:-150px; bottom:15%;
+    width:400px; height:400px; border-radius:50%;
+    background: radial-gradient(circle, rgba(232,149,109,0.05) 0%, transparent 65%);
+    pointer-events:none; z-index:0;
+  }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:1.2rem 3rem;
+    display:flex; justify-content:space-between; align-items:center;
+    background:rgba(9,7,12,0.88);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-logo {
+    font-family:var(--font-serif);
+    font-size:1.3rem; font-style:italic;
+    color:var(--rose-lt);
+    text-decoration:none;
+    letter-spacing:0.04em;
+  }
+  .nav-logo span { color:var(--text3); font-style:normal; font-size:0.7rem; font-family:var(--font-mono); letter-spacing:0.15em; margin-left:0.5rem; vertical-align:middle; }
+  .nav-links { display:flex; gap:2.5rem; list-style:none; }
+  .nav-links a {
+    font-family:var(--font-mono); font-size:0.68rem;
+    color:var(--text2); text-decoration:none;
+    letter-spacing:0.14em; text-transform:uppercase;
+    transition:color .2s;
+  }
+  .nav-links a:hover { color:var(--rose); }
+
+  section { position:relative; z-index:1; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height:100vh;
+    display:grid;
+    grid-template-columns:1fr 380px;
+    gap:4rem;
+    align-items:center;
+    padding:8rem 3rem 4rem;
+    overflow:hidden;
+  }
+  .hero-eyebrow {
+    font-family:var(--font-mono); font-size:0.72rem;
+    color:var(--pink); letter-spacing:0.2em; text-transform:uppercase;
+    display:flex; align-items:center; gap:.75rem;
+    margin-bottom:1.5rem;
+  }
+  .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--pink); display:block; }
+  .hero-name {
+    font-family:var(--font-serif);
+    font-size:clamp(3.2rem,7vw,6.5rem);
+    font-weight:300; line-height:0.95;
+    letter-spacing:-0.01em;
+    margin-bottom:1rem;
+  }
+  .hero-name .first { color:var(--text); display:block; }
+  .hero-name .last {
+    color:transparent;
+    -webkit-text-stroke:1px var(--rose);
+    font-style:italic;
+    display:block;
+  }
+  .hero-role {
+    font-family:var(--font-mono); font-size:0.82rem;
+    color:var(--rose-lt); letter-spacing:0.1em;
+    margin-bottom:2rem;
+  }
+  .hero-role .sep { color:var(--text3); margin:0 .6rem; }
+  .hero-desc {
+    font-size:1rem; color:var(--text2);
+    line-height:1.85; max-width:540px;
+    margin-bottom:2.5rem;
+  }
+  .hero-motto {
+    font-family:var(--font-serif);
+    font-style:italic; font-size:1.05rem;
+    color:var(--text3); border-left:2px solid var(--rose);
+    padding-left:1rem; margin-bottom:2.5rem;
+    max-width:460px; line-height:1.7;
+  }
+  .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; }
+
+  .btn-rose {
+    font-family:var(--font-mono); font-size:0.72rem;
+    letter-spacing:0.12em; text-transform:uppercase;
+    padding:.85rem 1.8rem;
+    background:linear-gradient(135deg,var(--pink),var(--rose));
+    color:#fff; border:none; text-decoration:none;
+    transition:opacity .2s, transform .15s;
+    display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn-rose:hover { opacity:.88; transform:translateY(-2px); }
+  .btn-ghost {
+    font-family:var(--font-mono); font-size:0.72rem;
+    letter-spacing:0.12em; text-transform:uppercase;
+    padding:.85rem 1.8rem;
+    background:transparent; color:var(--rose);
+    border:1px solid var(--border2);
+    text-decoration:none;
+    transition:border-color .2s, background .2s, transform .15s;
+    display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn-ghost:hover { border-color:var(--rose); background:rgba(232,149,109,0.07); transform:translateY(-2px); }
+
+  /* HERO PHOTO */
+  .hero-photo-col { display:flex; flex-direction:column; gap:1rem; align-items:center; }
+  .hero-img-wrap {
+    width:100%; aspect-ratio:3/4;
+    border:1px solid var(--border2);
+    overflow:hidden; position:relative;
+    background:var(--surface);
+    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:.75rem;
+  }
+  .hero-img-wrap::after {
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(180deg,transparent 60%,rgba(9,7,12,0.7) 100%);
+    pointer-events:none;
+  }
+  .hero-img-wrap img { width:100%;height:100%;object-fit:cover;display:block; }
+  .photo-hint { display:none !important; }
+  .hero-img-wrap input[type=file] { display:none !important; }
+
+  .hero-stats {
+    display:flex; gap:2.5rem; flex-wrap:wrap;
+    margin-top:3.5rem; padding-top:2.5rem;
+    border-top:1px solid var(--border);
+  }
+  .stat-num { font-size:2rem; font-weight:700; color:var(--rose); line-height:1; margin-bottom:.2rem; }
+  .stat-label { font-family:var(--font-mono); font-size:0.65rem; color:var(--text3); letter-spacing:.12em; text-transform:uppercase; }
+
+  /* ── SECTION HEADERS ── */
+  .sec-wrap { padding:7rem 3rem; }
+  .sec-wrap.alt { background:var(--bg2); }
+  .sec-head { display:flex; align-items:center; gap:1.25rem; margin-bottom:4rem; }
+  .sec-num { font-family:var(--font-mono); font-size:0.68rem; color:var(--pink); letter-spacing:.15em; }
+  .sec-title { font-family:var(--font-serif); font-size:clamp(1.8rem,4vw,3rem); font-weight:300; letter-spacing:.01em; }
+  .sec-line { flex:1; height:1px; background:var(--border); max-width:200px; }
+
+  /* ── ABOUT ── */
+  .about-grid { display:grid; grid-template-columns:1.1fr 0.9fr; gap:5rem; align-items:start; }
+  .about-text p { color:var(--text2); line-height:1.9; margin-bottom:1.4rem; font-size:.96rem; }
+  .about-text p strong { color:var(--rose-lt); font-weight:600; }
+  .about-text .italic-quote {
+    font-family:var(--font-serif); font-style:italic;
+    font-size:1.15rem; color:var(--pink-lt);
+    border-left:2px solid var(--pink);
+    padding-left:1rem; margin:2rem 0; line-height:1.7;
+  }
+  .pill-group { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem; }
+  .pill {
+    font-family:var(--font-mono); font-size:.62rem;
+    padding:.3rem .7rem;
+    background:rgba(212,99,154,0.08);
+    border:1px solid var(--border-pk);
+    color:var(--text2); letter-spacing:.05em;
+  }
+  .pill.rose { background:rgba(232,149,109,0.08); border-color:rgba(232,149,109,0.25); }
+
+  /* INTERESTS CARD */
+  .interest-card {
+    background:var(--surface); border:1px solid var(--border);
+    padding:1.75rem;
+  }
+  .interest-card h3 { font-family:var(--font-mono); font-size:.68rem; color:var(--pink); letter-spacing:.15em; text-transform:uppercase; margin-bottom:1.25rem; }
+  .interest-item { display:flex; align-items:center; gap:.75rem; padding:.55rem 0; border-bottom:1px solid var(--border); font-size:.88rem; color:var(--text2); }
+  .interest-item:last-child { border-bottom:none; }
+  .interest-dot { width:6px;height:6px;border-radius:50%;background:var(--rose);flex-shrink:0; }
+
+  /* ── SKILLS ── */
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.25rem; }
+  .skill-card {
+    background:var(--surface); border:1px solid var(--border);
+    padding:1.6rem; position:relative; overflow:hidden;
+    transition:border-color .2s, transform .2s;
+  }
+  .skill-card::before {
+    content:''; position:absolute; top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--pink),var(--rose),transparent);
+    opacity:0; transition:opacity .2s;
+  }
+  .skill-card:hover { border-color:var(--border2); transform:translateY(-4px); }
+  .skill-card:hover::before { opacity:1; }
+  .skill-cat { font-family:var(--font-mono); font-size:.62rem; color:var(--pink); letter-spacing:.18em; text-transform:uppercase; margin-bottom:.75rem; }
+  .skill-name { font-size:.95rem; font-weight:600; margin-bottom:.75rem; }
+  .skill-bar-wrap { height:2px; background:var(--border); margin-bottom:1rem; overflow:hidden; }
+  .skill-bar { height:100%; background:linear-gradient(90deg,var(--pink),var(--rose)); border-radius:2px; }
+  .tag-mini { display:flex; flex-wrap:wrap; gap:.35rem; }
+  .tag-mini span { font-family:var(--font-mono); font-size:.58rem; padding:.2rem .5rem; background:rgba(232,149,109,0.07); border:1px solid var(--border); color:var(--text2); }
+
+  /* ── PROJECTS ── */
+  .projects-list { display:flex; flex-direction:column; gap:1.5rem; }
+  .proj-card {
+    background:var(--surface); border:1px solid var(--border);
+    padding:2rem; display:grid;
+    grid-template-columns:80px 1fr;
+    gap:2rem; align-items:start;
+    transition:border-color .2s, transform .2s;
+  }
+  .proj-card:hover { border-color:var(--border2); transform:translateX(6px); }
+  .proj-num { font-family:var(--font-serif); font-size:3.5rem; font-weight:300; color:var(--border); line-height:1; }
+  .proj-title { font-size:1.05rem; font-weight:600; margin-bottom:.35rem; }
+  .proj-sub { font-family:var(--font-mono); font-size:.68rem; color:var(--pink); letter-spacing:.1em; margin-bottom:.75rem; }
+  .proj-desc { font-size:.88rem; color:var(--text2); line-height:1.75; }
+  .proj-tools { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:1rem; }
+
+  /* ── MODELLING GALLERY ── */
+  #modelling { padding:7rem 3rem; }
+  .gallery-intro { font-size:.96rem; color:var(--text2); max-width:500px; margin-bottom:3rem; line-height:1.8; }
+  .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
+  .gallery-slot {
+    aspect-ratio:3/4; background:var(--surface);
+    border:1px solid var(--border);
+    overflow:hidden; position:relative;
+    display:flex; align-items:center; justify-content:center;
+    flex-direction:column; gap:.5rem;
+    transition:border-color .2s;
+  }
+  .gallery-slot:hover { border-color:var(--border2); }
+  .gallery-slot img { width:100%;height:100%;object-fit:cover;display:block; position:absolute; inset:0; }
+  .gallery-slot input[type=file] { position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2; }
+  .gallery-label { display:none !important; }
+  .gallery-icon { display:none !important;  font-size:1.75rem; color:var(--text3); z-index:1; }
+  .gallery-slot::after {
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(180deg,transparent 50%,rgba(9,7,12,0.6) 100%);
+    pointer-events:none;
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-timeline { position:relative; }
+  .exp-timeline::before { content:''; position:absolute; left:10px;top:0;bottom:0;width:1px;background:var(--border); }
+  .exp-item { position:relative; padding-left:3rem; margin-bottom:3.5rem; }
+  .exp-dot { position:absolute;left:0;top:4px;width:20px;height:20px;border:1px solid var(--rose);background:var(--bg);display:flex;align-items:center;justify-content:center; }
+  .exp-dot::after { content:'';width:7px;height:7px;background:var(--rose); }
+  .exp-header { display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:.4rem; }
+  .exp-role { font-size:1.05rem; font-weight:600; }
+  .exp-org { color:var(--rose); font-weight:500; font-size:.92rem; }
+  .exp-date { font-family:var(--font-mono); font-size:.65rem; color:var(--text3); letter-spacing:.08em; text-align:right; flex-shrink:0; }
+  .exp-desc { font-size:.88rem; color:var(--text2); line-height:1.75; margin-top:.5rem; }
+  .exp-pills { display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem; }
+
+  /* ── CERTS ── */
+  .certs-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+  .cert-card {
+    background:var(--surface); border:1px solid var(--border);
+    padding:1.5rem; transition:border-color .2s;
+  }
+  .cert-card:hover { border-color:var(--border-pk); }
+  .cert-status { font-family:var(--font-mono); font-size:.58rem; letter-spacing:.12em; text-transform:uppercase; padding:.2rem .55rem; border:1px solid; display:inline-block; margin-bottom:.85rem; }
+  .cert-status.learning { color:var(--pink); border-color:rgba(212,99,154,0.35); }
+  .cert-status.goal { color:var(--gold); border-color:rgba(201,144,106,0.35); }
+  .cert-name { font-size:.92rem; font-weight:600; margin-bottom:.3rem; }
+  .cert-sub { font-size:.78rem; color:var(--text2); font-family:var(--font-mono); letter-spacing:.04em; }
+
+  /* ── CONTACT ── */
+  #contact { padding:7rem 3rem; text-align:center; }
+  .contact-headline { font-family:var(--font-serif); font-size:clamp(2.2rem,5vw,4.5rem); font-weight:300; line-height:1.05; margin-bottom:1.5rem; letter-spacing:.01em; }
+  .contact-headline em { color:var(--rose); font-style:italic; }
+  .contact-sub { font-size:.97rem; color:var(--text2); max-width:460px; margin:0 auto 3rem; line-height:1.8; }
+  .contact-btns { display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3.5rem; }
+  .contact-row { display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;padding-top:3rem;border-top:1px solid var(--border); }
+  .contact-item { font-family:var(--font-mono); font-size:.72rem; color:var(--text2); letter-spacing:.08em; display:flex;align-items:center;gap:.5rem; }
+  .contact-item .dot { width:5px;height:5px;border-radius:50%;background:var(--rose);flex-shrink:0; }
+
+  /* FOOTER */
+  footer {
+    padding:1.75rem 3rem; border-top:1px solid var(--border);
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--font-mono); font-size:.65rem; color:var(--text3);
+    letter-spacing:.1em; flex-wrap:wrap; gap:1rem;
+  }
+  footer span.rose { color:var(--rose); }
+
+  /* FADE IN */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)} }
+  .fu { animation:fadeUp .7s ease forwards; }
+  .d1{animation-delay:.1s;opacity:0} .d2{animation-delay:.2s;opacity:0}
+  .d3{animation-delay:.3s;opacity:0} .d4{animation-delay:.4s;opacity:0}
+  .d5{animation-delay:.55s;opacity:0}
+
+  /* BLINK */
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+  .blink{animation:blink 1.2s infinite;color:var(--pink);}
+
+  /* SHIMMER on hero name */
+  @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+
+  @media(max-width:900px){
+    nav{padding:1rem 1.5rem}
+    .nav-links{gap:1.5rem}
+    #hero{grid-template-columns:1fr;padding:7rem 1.5rem 3rem}
+    .hero-photo-col{display:none}
+    .about-grid{grid-template-columns:1fr;gap:3rem}
+    .proj-card{grid-template-columns:1fr}
+    .gallery-grid{grid-template-columns:repeat(2,1fr)}
+    .sec-wrap,.sec-wrap.alt,#modelling,#contact{padding:5rem 1.5rem}
+    footer{padding:1.5rem}
+  }
+
+  .hero-img-wrap svg, .gallery-icon { display:none !important; }
+  .photo-hint, .gallery-label { display:none !important; }
+  .hero-img-wrap input[type=file], .gallery-slot input[type=file] { display:none !important; }
+  .hero-img-wrap img, .gallery-slot img { width:100%;height:100%;object-fit:cover;display:block !important; }
+
+  /* CONTACT FORM */
+  .contact-form { max-width:500px; margin:0 auto 3rem; display:flex; flex-direction:column; gap:1rem; }
+  .form-group { display:flex; flex-direction:column; gap:.5rem; }
+  .form-group label { font-family:var(--font-mono); font-size:.75rem; color:var(--text2); letter-spacing:.08em; text-transform:uppercase; }
+  .form-group input, .form-group textarea { background:rgba(22,17,31,0.6); border:1px solid var(--border); color:var(--text); padding:.75rem; font-family:var(--font-main); font-size:.9rem; }
+  .form-group input:focus, .form-group textarea:focus { outline:none; border-color:var(--rose); background:rgba(22,17,31,0.9); }
+  .form-group textarea { resize:vertical; min-height:120px; }
+  .form-submit { font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; padding:.85rem 1.8rem; background:linear-gradient(135deg,var(--pink),var(--rose)); color:#fff; border:none; cursor:pointer; transition:opacity .2s, transform .15s; }
+  .form-submit:hover { opacity:.88; transform:translateY(-2px); }
+  .form-submit:disabled { opacity:.5; cursor:not-allowed; }
+</style>
+</head>
+<body>
+
+<div class="glow-left"></div>
+<div class="glow-right"></div>
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Atti Cindy<span>portfolio</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#modelling">Modelling</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <div class="hero-eyebrow fu d1">Data Science Student · Uganda Christian University</div>
+    <h1 class="hero-name fu d2">
+      <span class="first">Atti Cindy</span>
+      <span class="last">Lynnette</span>
+    </h1>
+    <p class="hero-role fu d3">
+      Data Science<span class="sep">·</span>Business Intelligence<span class="sep">·</span>Analytics<span class="blink"> _</span>
+    </p>
+    <p class="hero-desc fu d4">
+      Passionate about using data and technology to solve real-world problems — from community sanitation to business intelligence. Building the foundations today to become a world-class data scientist tomorrow.
+    </p>
+    <blockquote class="hero-motto fu d4">
+      "Growth, consistency, and impact — becoming better while helping others become better too."
+    </blockquote>
+    <div class="hero-btns fu d5">
+      <a href="#projects" class="btn-rose">View My Work →</a>
+      <a href="#contact" class="btn-ghost">Let's Connect</a>
+    </div>
+    <div class="hero-stats fu d5">
+      <div><div class="stat-num">5+</div><div class="stat-label">Tech Skills</div></div>
+      <div><div class="stat-num">5</div><div class="stat-label">Projects</div></div>
+      <div><div class="stat-num">UCU</div><div class="stat-label">University</div></div>
+      <div><div class="stat-num">MKN</div><div class="stat-label">Mukono, UG</div></div>
+    </div>
+  </div>
+
+  <!-- HERO PHOTO -->
+  <div class="hero-photo-col">
+    <div class="hero-img-wrap" id="heroSlot">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="color:var(--text3)"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <div class="photo-hint">[ PROFILE PHOTO ]<br>click to upload</div>
+      <img id="heroImg" src="profile_photo.jpeg" alt="Atti Cindy Lynnette">
+      <input type="file" accept="image/*" id="heroInput">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="sec-wrap alt">
+  <div class="sec-head">
+    <span class="sec-num">01 /</span>
+    <h2 class="sec-title">About Me</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm <strong>Atti Cindy Lynnette</strong>, a Data Science student at Uganda Christian University in Mukono, with a deep passion for using technology and data to create meaningful impact in the world.</p>
+      <p>My interests span <strong>business intelligence, finance technology, analytics, and AI</strong> — areas where I believe data has the power to transform communities, organisations, and lives. I approach every challenge with curiosity, discipline, and a drive to grow.</p>
+      <div class="italic-quote">"I believe growth, creativity, and bringing out the best in the people around me are the most powerful tools I have."</div>
+      <p>Beyond data, I'm a creative soul — I love <strong>modelling, fashion, music, and design</strong>. My long-term vision is to become a world-class data scientist working with leading global technology and finance companies, while inspiring others to pursue their own ambitions in tech.</p>
+      <div class="pill-group">
+        <span class="pill">Data Science</span>
+        <span class="pill">Business Intelligence</span>
+        <span class="pill">Finance Technology</span>
+        <span class="pill rose">Modelling</span>
+        <span class="pill rose">Fashion</span>
+        <span class="pill rose">Creative Design</span>
+      </div>
+    </div>
+    <div>
+      <div class="interest-card">
+        <h3>Interests & Personality</h3>
+        <div class="interest-item"><div class="interest-dot"></div>Modelling &amp; fashion expression</div>
+        <div class="interest-item"><div class="interest-dot"></div>Exploring new technologies</div>
+        <div class="interest-item"><div class="interest-dot"></div>Creative design &amp; aesthetics</div>
+        <div class="interest-item"><div class="interest-dot"></div>Listening to music</div>
+        <div class="interest-item"><div class="interest-dot"></div>Personal development</div>
+        <div class="interest-item"><div class="interest-dot"></div>Networking with ambitious people</div>
+        <div class="interest-item"><div class="interest-dot"></div>Educational &amp; tech content</div>
+        <div class="interest-item"><div class="interest-dot"></div>Mentoring &amp; empowering others</div>
+      </div>
+      <div class="interest-card" style="margin-top:1rem;">
+        <h3>Education</h3>
+        <div class="interest-item" style="flex-direction:column;align-items:flex-start;gap:.2rem;">
+          <span style="color:var(--text);font-weight:500;font-size:.9rem;">BSc Data Science</span>
+          <span style="font-family:var(--font-mono);font-size:.65rem;color:var(--text3);">Uganda Christian University · Mukono · In Progress</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="sec-wrap">
+  <div class="sec-head">
+    <span class="sec-num">02 /</span>
+    <h2 class="sec-title">Skills</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-cat">Analytics</div>
+      <div class="skill-name">Microsoft Excel</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div>
+      <div class="tag-mini"><span>Data Cleaning</span><span>Formulas</span><span>Pivot Tables</span><span>Dashboards</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Visualisation</div>
+      <div class="skill-name">Power BI</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div>
+      <div class="tag-mini"><span>Dashboard Design</span><span>Data Viz</span><span>Reports</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Database</div>
+      <div class="skill-name">SQL</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:60%"></div></div>
+      <div class="tag-mini"><span>Querying</span><span>Data Analysis</span><span>Database Design</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Programming</div>
+      <div class="skill-name">Python</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:55%"></div></div>
+      <div class="tag-mini"><span>Data Science</span><span>Analysis</span><span>Scripting</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Research</div>
+      <div class="skill-name">Data Analysis</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:72%"></div></div>
+      <div class="tag-mini"><span>Statistical Analysis</span><span>Documentation</span><span>DSS</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Soft Skills</div>
+      <div class="skill-name">Leadership & Comms</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div>
+      <div class="tag-mini"><span>Team Collaboration</span><span>Public Speaking</span><span>Critical Thinking</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="sec-wrap alt">
+  <div class="sec-head">
+    <span class="sec-num">03 /</span>
+    <h2 class="sec-title">Projects</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="projects-list">
+
+    <div class="proj-card">
+      <div class="proj-num">01</div>
+      <div>
+        <div class="proj-title">Power BI Business Dashboard</div>
+        <div class="proj-sub">Personal Project</div>
+        <p class="proj-desc">Designed and developed an interactive business intelligence dashboard using Power BI to transform raw data into meaningful insights. Interactive visualizations, KPI tracking, sales and performance analysis, trend identification and data-driven decision-making support.</p>
+        <div class="proj-tools">
+          <span class="pill">Power BI</span><span class="pill">Data Visualization</span><span class="pill">Business Intelligence</span><span class="pill rose">KPI Tracking</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-num">02</div>
+      <div>
+        <div class="proj-title">Excel Sales Dashboard</div>
+        <div class="proj-sub">Personal Project</div>
+        <p class="proj-desc">Built a sales dashboard in Microsoft Excel to analyze and present sales performance metrics in a clear and user-friendly format. Includes Pivot Tables, sales trend analysis, KPI monitoring, and interactive reporting capabilities.</p>
+        <div class="proj-tools">
+          <span class="pill">Microsoft Excel</span><span class="pill">Pivot Tables</span><span class="pill">Data Analysis</span><span class="pill rose">Data Visualization</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-num">03</div>
+      <div>
+        <div class="proj-title">Information Hub for Farmers in Uganda</div>
+        <div class="proj-sub">Group Project</div>
+        <p class="proj-desc">Collaborated with a team to design and develop an information hub aimed at improving access to agricultural information for farmers in Uganda. Contributed research, project planning, documentation, and system analysis to support informed decision-making and technology adoption in agriculture.</p>
+        <div class="proj-tools">
+          <span class="pill">Teamwork</span><span class="pill">Research</span><span class="pill">Problem Solving</span><span class="pill rose">System Analysis</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-num">04</div>
+      <div>
+        <div class="proj-title">Personal Portfolio Website</div>
+        <div class="proj-sub">Personal Project</div>
+        <p class="proj-desc">Designed and developed a professional portfolio website to showcase skills, projects, interests, and career aspirations as a Data Science student. Features responsive web design, project showcase section, and professional profile with online presence.</p>
+        <div class="proj-tools">
+          <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">Web Design</span><span class="pill rose">Personal Branding</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODELLING GALLERY -->
+<section id="modelling">
+  <div class="sec-head">
+    <span class="sec-num">04 /</span>
+    <h2 class="sec-title">Modelling</h2>
+    <div class="sec-line"></div>
+  </div>
+  <p class="gallery-intro">Beyond data and technology, I express myself through fashion and modelling — a creative outlet that reflects my personality, confidence, and eye for aesthetics.</p>
+  <div class="gallery-grid">
+    <div class="gallery-slot" id="slot1">
+      <svg class="gallery-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <div class="gallery-label">Photo 01<br>click to upload</div>
+      <img id="gImg1" src="modeling_1.jpeg" alt="Modelling photo 1">
+      <input type="file" accept="image/*" id="gInput1">
+    </div>
+    <div class="gallery-slot" id="slot2">
+      <svg class="gallery-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <div class="gallery-label">Photo 02<br>click to upload</div>
+      <img id="gImg2" src="modeling_2.jpeg" alt="Modelling photo 2">
+      <input type="file" accept="image/*" id="gInput2">
+    </div>
+    <div class="gallery-slot" id="slot3">
+      <svg class="gallery-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <div class="gallery-label">Photo 03<br>click to upload</div>
+      <img id="gImg3" src="modeling_3.jpeg" alt="Modelling photo 3">
+      <input type="file" accept="image/*" id="gInput3">
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="sec-wrap alt">
+  <div class="sec-head">
+    <span class="sec-num">05 /</span>
+    <h2 class="sec-title">Certifications & Learning</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-card">
+      <span class="cert-status learning">In Progress</span>
+      <div class="cert-name">SQL for Data Analysis</div>
+      <div class="cert-sub">Querying · Database Design</div>
+    </div>
+    <div class="cert-card">
+      <span class="cert-status learning">In Progress</span>
+      <div class="cert-name">Advanced Excel</div>
+      <div class="cert-sub">Dashboards · Data Modelling</div>
+    </div>
+    <div class="cert-card">
+      <span class="cert-status learning">In Progress</span>
+      <div class="cert-name">Power BI</div>
+      <div class="cert-sub">Data Visualisation · Reporting</div>
+    </div>
+    <div class="cert-card">
+      <span class="cert-status goal">Goal</span>
+      <div class="cert-name">Data Analytics Certificate</div>
+      <div class="cert-sub">Google · Coursera</div>
+    </div>
+    <div class="cert-card">
+      <span class="cert-status goal">Goal</span>
+      <div class="cert-name">Python for Data Science</div>
+      <div class="cert-sub">IBM · Coursera</div>
+    </div>
+    <div class="cert-card">
+      <span class="cert-status goal">Goal</span>
+      <div class="cert-name">Data Visualisation</div>
+      <div class="cert-sub">Tableau · Power BI</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-head" style="justify-content:center;text-align:center;">
+    <span class="sec-num">06 /</span>
+    <h2 class="sec-title">Get In Touch</h2>
+  </div>
+  <p class="contact-headline">Let's build something<br><em>meaningful</em> together.</p>
+  <p class="contact-sub">Open to collaborations, mentorships, internships, and conversations about data, tech, and the future. I'd love to hear from you.</p>
+  <form class="contact-form" id="contactForm" method="POST" action="https://formspree.io/f/mzdwqoep">
+    <div class="form-group">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required placeholder="Enter your name">
+    </div>
+    <div class="form-group">
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+    </div>
+    <div class="form-group">
+      <label for="subject">Subject</label>
+      <input type="text" id="subject" name="subject" required placeholder="What's this about?">
+    </div>
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required placeholder="Tell me more..."></textarea>
+    </div>
+    <button type="submit" class="form-submit">Send Message ?</button>
+  </form>
+  <div class="contact-btns">
+    <a href="https://www.linkedin.com/in/cindy-atti-7019aa341/" class="btn-ghost" target="_blank">LinkedIn ↗</a>
+    <a href="https://github.com/acilynn" class="btn-ghost" target="_blank">GitHub ↗</a>
+  </div>
+  <div class="contact-row">
+    <div class="contact-item"><div class="dot"></div>Mukono, Uganda</div>
+    <div class="contact-item"><div class="dot"></div>Uganda Christian University</div>
+    <div class="contact-item"><div class="dot"></div>Data Science · BI · Analytics</div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Atti Cindy Lynnette</span>
+  <span>Made with <span class="rose">♥</span> · Mukono, Uganda</span>
+</footer>
+
+<script>
+  const cur = document.getElementById('cur');
+  const ring = document.getElementById('cur-ring');
+  let mx=0,my=0,rx=0,ry=0;
+
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX; my=e.clientY;
+    cur.style.left=mx-3.5+'px';
+    cur.style.top=my-3.5+'px';
+  });
+  (function animRing(){
+    rx+=(mx-rx)*.13; ry+=(my-ry)*.13;
+    ring.style.left=rx-15+'px'; ring.style.top=ry-15+'px';
+    requestAnimationFrame(animRing);
+  })();
+
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.width='46px';ring.style.height='46px';ring.style.borderColor='rgba(212,99,154,0.8)';});
+    el.addEventListener('mouseleave',()=>{ring.style.width='30px';ring.style.height='30px';ring.style.borderColor='rgba(212,99,154,0.5)';});
+  });
+
+  // Contact form handler
+  function sendContactEmail(event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+    
+    const mailtoLink = `mailto:acilynn2018@email.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
+    window.location.href = mailtoLink;
+  }
+
+  // Email button - direct link works in all browsers
+  const emailBtn = document.getElementById('emailBtn');
+  if (emailBtn) {
+    emailBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const email = 'acilynn2018@email.com';
+      const subject = 'Hello Cindy';
+      const mailtoLink = 'mailto:' + email + '?subject=' + encodeURIComponent(subject);
+      window.location.href = mailtoLink;
+      return false;
+    });
+  }
+
+  // Scroll animation
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.style.opacity='1';
+        e.target.style.transform='translateY(0)';
+        e.target.style.transition='opacity .6s ease, transform .6s ease';
+      }
+    });
+  },{threshold:.1});
+
+  document.querySelectorAll('.skill-card,.proj-card,.cert-card,.gallery-slot').forEach(el=>{
+    el.style.opacity='0'; el.style.transform='translateY(18px)';
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
