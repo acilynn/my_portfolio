@@ -255,6 +255,29 @@
   .tag-mini { display:flex; flex-wrap:wrap; gap:.35rem; }
   .tag-mini span { font-family:var(--font-mono); font-size:.58rem; padding:.2rem .5rem; background:rgba(232,149,109,0.07); border:1px solid var(--border); color:var(--text2); }
 
+  /* ── SKILL CATEGORY ── */
+  .skill-category {
+    background:var(--surface); border:1px solid var(--border);
+    padding:2rem; margin-top:2rem; border-radius:0.5rem;
+  }
+  .skill-category h3 {
+    font-size:1.2rem; font-weight:600; color:var(--rose-lt);
+    margin-bottom:1.5rem; letter-spacing:0.04em;
+  }
+  .skill-category ul {
+    list-style:none; display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:1rem;
+  }
+  .skill-category li {
+    font-size:0.95rem; color:var(--text);
+    padding:0.5rem 0; border-left:2px solid var(--pink);
+    padding-left:1rem; transition:color 0.2s, padding-left 0.2s;
+  }
+  .skill-category li:hover {
+    color:var(--rose-lt); padding-left:1.25rem;
+  }
+
   /* ── PROJECTS ── */
   .projects-list { display:flex; flex-direction:column; gap:1.5rem; }
   .proj-card {
@@ -531,6 +554,29 @@
       <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div>
       <div class="tag-mini"><span>Team Collaboration</span><span>Public Speaking</span><span>Critical Thinking</span></div>
     </div>
+  </div>
+  <div class="skill-category">
+    <h3>Networking & Infrastructure</h3>
+    <ul>
+      <li>Enterprise Network Design</li>
+      <li>VLAN Configuration & Segmentation</li>
+      <li>Inter-VLAN Routing</li>
+      <li>Router-on-a-Stick Configuration</li>
+      <li>OSPF Dynamic Routing</li>
+      <li>Layer 2 & Layer 3 Switching</li>
+      <li>SSH Remote Device Management</li>
+      <li>Switch Security & VTY Configuration</li>
+      <li>Structured Cabling & Patch Panel Configuration</li>
+      <li>Ethernet Cable Termination</li>
+      <li>Subnetting (VLSM)</li>
+      <li>Network Topology Design (Physical & Logical)</li>
+      <li>Cisco Packet Tracer Simulation</li>
+      <li>Linux Samba File Sharing</li>
+      <li>Fault Tolerance & Resilience Design</li>
+      <li>Access Point Configuration</li>
+      <li>WAN Point-to-Point Connections</li>
+      <li>Network Troubleshooting</li>
+    </ul>
   </div>
 </section>
 
