@@ -168,6 +168,17 @@
     display:inline-flex; align-items:center; gap:.5rem;
   }
   .btn-ghost:hover { border-color:var(--rose); background:rgba(232,149,109,0.07); transform:translateY(-2px); }
+  .btn {
+    font-family:var(--font-mono); font-size:0.72rem;
+    letter-spacing:0.12em; text-transform:uppercase;
+    padding:.85rem 1.8rem;
+    background:rgba(232,149,109,0.1); color:var(--rose);
+    border:1px solid var(--border2);
+    text-decoration:none;
+    transition:background .2s, transform .15s;
+    display:inline-flex; align-items:center; gap:.5rem;
+  }
+  .btn:hover { background:rgba(232,149,109,0.18); transform:translateY(-2px); }
 
   /* HERO PHOTO */
   .hero-photo-col { display:flex; flex-direction:column; gap:1rem; align-items:center; }
@@ -497,6 +508,7 @@
     <div class="hero-btns fu d5">
       <a href="#projects" class="btn-rose">View My Work →</a>
       <a href="#contact" class="btn-ghost">Let's Connect</a>
+      <a href="Atti_Cindy_Lynnette_CV.pdf" download class="btn">Download My CV</a>
     </div>
     <div class="hero-stats fu d5">
       <div><div class="stat-num">5+</div><div class="stat-label">Tech Skills</div></div>
