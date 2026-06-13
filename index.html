@@ -278,6 +278,57 @@
     color:var(--rose-lt); padding-left:1.25rem;
   }
 
+  /* ── INTERESTS ── */
+  .interests-list {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:1.5rem;
+  }
+  .interest-item {
+    background:var(--surface); border:1px solid var(--border);
+    padding:1.5rem; text-align:center;
+    font-size:0.95rem; font-weight:500;
+    color:var(--rose-lt); cursor:pointer;
+    transition:all 0.3s;
+    border-left:3px solid var(--pink);
+  }
+  .interest-item:hover {
+    background:rgba(232,149,109,0.1); border-color:var(--border2);
+    transform:translateY(-3px); box-shadow:0 8px 24px rgba(212,99,154,0.1);
+  }
+
+  /* ── BLOG ── */
+  .blog-container {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:2rem;
+  }
+  .blog-card {
+    background:var(--surface); border:1px solid var(--border);
+    padding:2rem; border-radius:0.5rem;
+    transition:all 0.3s;
+  }
+  .blog-card:hover {
+    border-color:var(--border2); transform:translateY(-4px);
+    box-shadow:0 12px 32px rgba(232,149,109,0.15);
+  }
+  .blog-card h3 {
+    font-size:1.05rem; font-weight:600; color:var(--rose-lt);
+    margin-bottom:1rem; line-height:1.4;
+  }
+  .blog-card p {
+    font-size:0.95rem; color:var(--text2); line-height:1.7;
+    margin-bottom:1.5rem;
+  }
+  .blog-card a {
+    color:var(--rose); text-decoration:none;
+    font-family:var(--font-mono); font-size:0.85rem;
+    letter-spacing:0.1em; transition:color 0.2s;
+  }
+  .blog-card a:hover {
+    color:var(--rose-lt);
+  }
+
   /* ── PROJECTS ── */
   .projects-list { display:flex; flex-direction:column; gap:1.5rem; }
   .proj-card {
@@ -419,8 +470,9 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#interests">Interests</a></li>
     <li><a href="#projects">Projects</a></li>
-    <li><a href="#modelling">Modelling</a></li>
+    <li><a href="#blog">Blog</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -474,6 +526,9 @@
   </div>
   <div class="about-grid">
     <div class="about-text">
+      <h3 style="font-size:1.1rem; margin-bottom:1rem; color:var(--rose-lt);">Professional Summary</h3>
+      <p>I am a Data Science student at Uganda Christian University with growing expertise in data analytics, business intelligence, networking, and enterprise systems. My interests lie in solving real-world problems through technology, particularly in finance, agriculture, and digital infrastructure. I am passionate about building scalable systems and using data to drive smarter decisions.</p>
+      <hr style="border:none; height:1px; background:var(--border); margin:1.5rem 0;">
       <p>I'm <strong>Atti Cindy Lynnette</strong>, a Data Science student at Uganda Christian University in Mukono, with a deep passion for using technology and data to create meaningful impact in the world.</p>
       <p>My interests span <strong>business intelligence, finance technology, analytics, and AI</strong> — areas where I believe data has the power to transform communities, organisations, and lives. I approach every challenge with curiosity, discipline, and a drive to grow.</p>
       <div class="italic-quote">"I believe growth, creativity, and bringing out the best in the people around me are the most powerful tools I have."</div>
@@ -578,6 +633,15 @@
       <li>Network Troubleshooting</li>
     </ul>
   </div>
+  <div class="skill-category">
+    <h3>Languages</h3>
+    <ul>
+      <li>English — Fluent</li>
+      <li>Luganda — Fluent</li>
+      <li>Madi — Native/Fluent</li>
+      <li>French — Basic (Learning)</li>
+    </ul>
+  </div>
 </section>
 
 <!-- PROJECTS -->
@@ -640,10 +704,26 @@
   </div>
 </section>
 
+<!-- CAREER INTERESTS -->
+<section id="interests" class="sec-wrap alt">
+  <div class="sec-head">
+    <span class="sec-num">04 /</span>
+    <h2 class="sec-title">Career Interests</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="interests-list">
+    <div class="interest-item">Data Science</div>
+    <div class="interest-item">Financial Analytics</div>
+    <div class="interest-item">Business Intelligence</div>
+    <div class="interest-item">Network Engineering</div>
+    <div class="interest-item">AI for Agriculture</div>
+  </div>
+</section>
+
 <!-- MODELLING GALLERY -->
 <section id="modelling">
   <div class="sec-head">
-    <span class="sec-num">04 /</span>
+    <span class="sec-num">05 /</span>
     <h2 class="sec-title">Modelling</h2>
     <div class="sec-line"></div>
   </div>
@@ -673,7 +753,7 @@
 <!-- CERTIFICATIONS -->
 <section class="sec-wrap alt">
   <div class="sec-head">
-    <span class="sec-num">05 /</span>
+    <span class="sec-num">06 /</span>
     <h2 class="sec-title">Certifications & Learning</h2>
     <div class="sec-line"></div>
   </div>
@@ -711,10 +791,41 @@
   </div>
 </section>
 
+<!-- BLOG & ARTICLES -->
+<section id="blog" class="sec-wrap alt">
+  <div class="sec-head">
+    <span class="sec-num">07 /</span>
+    <h2 class="sec-title">Articles & Reflections</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="blog-container">
+    <div class="blog-card">
+      <h3>Structured Cabling and File Streaming in Linux Networks</h3>
+      <p>A reflection on our networking practical where we terminated Ethernet cables, used patch panels, configured Linux file sharing with Samba, and streamed files across a local network.</p>
+      <a href="#" target="_blank">Read Article →</a>
+    </div>
+    <div class="blog-card">
+      <h3>Enterprise Network Design and Topology Implementation</h3>
+      <p>Documenting the process of designing and implementing a multi-rack enterprise network topology using VLANs, inter-VLAN routing, SSH management, and trunking in Cisco Packet Tracer.</p>
+      <a href="#" target="_blank">Read Article →</a>
+    </div>
+    <div class="blog-card">
+      <h3>Pitching Kilimo Hub: Building Agricultural Information Systems</h3>
+      <p>Insights from presenting Kilimo Hub, an agricultural information platform designed to connect farmers with market information, resources, and support systems.</p>
+      <a href="#" target="_blank">Read Article →</a>
+    </div>
+    <div class="blog-card">
+      <h3>Power BI Banking Dashboard Development</h3>
+      <p>Exploring data visualization, dashboard design, and business intelligence principles through building an interactive banking dashboard using Power BI.</p>
+      <a href="#" target="_blank">Read Article →</a>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="sec-head" style="justify-content:center;text-align:center;">
-    <span class="sec-num">06 /</span>
+    <span class="sec-num">08 /</span>
     <h2 class="sec-title">Get In Touch</h2>
   </div>
   <p class="contact-headline">Let's build something<br><em>meaningful</em> together.</p>
