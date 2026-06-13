@@ -141,7 +141,7 @@
   .hero-motto {
     font-family:var(--font-serif);
     font-style:italic; font-size:1.05rem;
-    color:var(--text3); border-left:2px solid var(--rose);
+    color:var(--rose-lt); border-left:2px solid var(--rose);
     padding-left:1rem; margin-bottom:2.5rem;
     max-width:460px; line-height:1.7;
   }
@@ -172,13 +172,13 @@
     font-family:var(--font-mono); font-size:0.72rem;
     letter-spacing:0.12em; text-transform:uppercase;
     padding:.85rem 1.8rem;
-    background:rgba(232,149,109,0.1); color:var(--rose);
-    border:1px solid var(--border2);
+    background:linear-gradient(135deg,rgba(232,149,109,0.3),rgba(232,149,109,0.15)); color:var(--rose-lt);
+    border:1.5px solid var(--rose);
     text-decoration:none;
     transition:background .2s, transform .15s;
     display:inline-flex; align-items:center; gap:.5rem;
   }
-  .btn:hover { background:rgba(232,149,109,0.18); transform:translateY(-2px); }
+  .btn:hover { background:linear-gradient(135deg,rgba(232,149,109,0.4),rgba(232,149,109,0.25)); transform:translateY(-2px); }
 
   /* HERO PHOTO */
   .hero-photo-col { display:flex; flex-direction:column; gap:1rem; align-items:center; }
@@ -814,22 +814,17 @@
     <div class="blog-card">
       <h3>Structured Cabling and File Streaming in Linux Networks</h3>
       <p>A reflection on our networking practical where we terminated Ethernet cables, used patch panels, configured Linux file sharing with Samba, and streamed files across a local network.</p>
-      <a href="#" target="_blank">Read Article →</a>
+      <a href="https://medium.com/@acilynn2025/from-theory-to-reality-building-and-testing-a-network-with-our-own-hands-b9baf20d339d" target="_blank">Read Article →</a>
     </div>
     <div class="blog-card">
       <h3>Enterprise Network Design and Topology Implementation</h3>
       <p>Documenting the process of designing and implementing a multi-rack enterprise network topology using VLANs, inter-VLAN routing, SSH management, and trunking in Cisco Packet Tracer.</p>
-      <a href="#" target="_blank">Read Article →</a>
+      <a href="https://medium.com/@acilynn2025/from-cable-ends-to-core-switches-building-a-live-multi-rack-network-1ea373f53ba3" target="_blank">Read Article →</a>
     </div>
     <div class="blog-card">
       <h3>Pitching Kilimo Hub: Building Agricultural Information Systems</h3>
       <p>Insights from presenting Kilimo Hub, an agricultural information platform designed to connect farmers with market information, resources, and support systems.</p>
-      <a href="#" target="_blank">Read Article →</a>
-    </div>
-    <div class="blog-card">
-      <h3>Power BI Banking Dashboard Development</h3>
-      <p>Exploring data visualization, dashboard design, and business intelligence principles through building an interactive banking dashboard using Power BI.</p>
-      <a href="#" target="_blank">Read Article →</a>
+      <a href="https://medium.com/@acilynn2025/a-lean-scalable-revenue-model-for-smallholder-farmers-4b6c75fe7ddb" target="_blank">Read Article →</a>
     </div>
   </div>
 </section>
